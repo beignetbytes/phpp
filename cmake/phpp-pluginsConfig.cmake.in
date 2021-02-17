@@ -1,0 +1,9 @@
+# This module sets the following variables:
+# * phpp-plugins_FOUND - true if tspp-time-series found on the system
+# * phpp-plugins_INCLUDE_DIRS - the directory containing tspp-time-series headers
+@PACKAGE_INIT@
+
+if(NOT TARGET tspp::time_series)
+  include("${CMAKE_CURRENT_LIST_DIR}/phpp-pluginsTargets.cmake")
+  get_target_property(phpp-plugins_INCLUDE_DIRS phpp::phpp INTERFACE_INCLUDE_DIRECTORIES)
+endif()

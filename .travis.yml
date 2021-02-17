@@ -1,0 +1,40 @@
+language: cpp
+sudo: required
+dist: focal
+
+matrix:
+  include:
+    - os: linux
+      compiler: clang
+      env:
+        - CC=clang-8
+        - CXX=clang++-8
+        - CBUILD_TYPE="Release"
+      
+    - os: linux
+      compiler: gcc
+      env:
+        - CBUILD_TYPE="Release"
+
+    - os: linux
+      compiler: gcc
+      env:
+        - TYPE="codecov"
+        - CXXFLAGS="--coverage"
+
+addons:
+  apt:
+    packages:
+      - lcov
+      - clang-8
+
+script:
+  - mkdir build
+  - cd build
+  - cmake -DCMAKE_BUILD_TYPE="$CBUILD_TYPE" ..
+  - VERBOSE=1 make
+  - cd tests
+  - ./tspp-time-series_tests
+
+after_success:
+  - if [[ "$TYPE" == "codecov" ]]; then lcov -c -b ../../include/ -d . -o coverage.info --no-external && bash <(curl -s https://codecov.io/bash) -f coverage.info; fi
