@@ -34,7 +34,7 @@ script:
   - cmake -DCMAKE_BUILD_TYPE="$CBUILD_TYPE" ..
   - VERBOSE=1 make
   - cd tests
-  - ./tspp-time-series_tests
+  - ./phpp-plugins_tests
 
 after_success:
   - if [[ "$TYPE" == "codecov" ]]; then lcov -c -b ../../include/ -d . -o coverage.info --no-external && bash <(curl -s https://codecov.io/bash) -f coverage.info; fi
