@@ -14,7 +14,7 @@ namespace phpp {
 		std::unordered_map<std::string, std::unique_ptr<lib_handler>> _open_lib_dict;
 
 	  public:
-		plugin_handler(std::string pl_dir_path) noexcept
+		explicit plugin_handler(const std::string& pl_dir_path) noexcept
 			: _pl_dir_path(pl_dir_path){
 
 			  };
@@ -24,7 +24,7 @@ namespace phpp {
 			}
 		};
 		template <typename T>
-		std::shared_ptr<T> get_plugin(std::string lib_name, std::string pl_name) {
+		std::shared_ptr<T> get_plugin(const std::string& lib_name, const std::string& pl_name) {
 			std::string fullpath = _pl_dir_path + lib_name;
 			if (_open_lib_dict.find(fullpath) == _open_lib_dict.end()) {
 				auto lh = std::make_unique<lib_handler>(fullpath);

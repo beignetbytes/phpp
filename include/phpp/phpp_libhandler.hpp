@@ -26,7 +26,7 @@ namespace phpp {
 		std::string _lib_suffix = ".so";
 #endif
 	  public:
-		lib_handler(std::string path_to_lib) noexcept : _libhandle(nullptr), _lib_path(path_to_lib) {}
+		explicit lib_handler(const std::string& path_to_lib) noexcept : _libhandle(nullptr), _lib_path(path_to_lib) {}
 
 		~lib_handler() = default;
 
