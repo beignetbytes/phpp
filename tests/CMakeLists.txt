@@ -46,9 +46,7 @@ endif()
 
 find_package(GTest REQUIRED PATHS ${GTEST_DIR}) 
 
-target_link_libraries(${BINARY} PRIVATE phpp::plugins)
-
-target_link_libraries(${BINARY} PUBLIC GTest::gtest pthread)
+target_link_libraries(${BINARY} ${CMAKE_DL_LIBS} GTest::gtest pthread phpp::plugins)
 
 add_library(testextlib1 SHARED
     ../examples/interfaces.hpp
